@@ -2,33 +2,24 @@
   "name": "final-project",
   "version": "1.0.0",
   "description": "Fullstack app with node.js vue.js",
-  "main": "app.js",
+  "author": "Kemal Öncel",
   "scripts": {
+    "client": "npm run serve --prefix client",
+    "client-install": "npm install --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon app.js",
     "start": "node app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kemaloncell/-Reengen-bootcamp-final-project.git"
-  },
-  "keywords": [
-    "node.js",
-    "vue.js",
-    "mongodb",
-    "postgre.sql"
-  ],
-  "author": "Kemal Öncel",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/kemaloncell/-Reengen-bootcamp-final-project/issues"
-  },
-  "homepage": "https://github.com/kemaloncell/-Reengen-bootcamp-final-project#readme",
+  "main": "app.js",
   "dependencies": {
+    "axios": "^0.24.0",
     "bcryptjs": "^2.4.3",
     "body": "^5.1.0",
     "concurrently": "^6.4.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-validator": "^6.13.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.14",
     "parser": "^0.1.4",
@@ -36,6 +27,22 @@
     "passport-jwt": "^4.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "vue-cli-plugin-vuetify": "~2.4.5"
+  },
+  "bugs": {
+    "url": "https://github.com/kemaloncell/-Reengen-bootcamp-final-project/issues"
+  },
+  "homepage": "https://github.com/kemaloncell/-Reengen-bootcamp-final-project#readme",
+  "keywords": [
+    "node.js",
+    "vue.js",
+    "mongodb",
+    "postgre.sql"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kemaloncell/-Reengen-bootcamp-final-project.git"
   }
 }

@@ -1,4 +1,5 @@
 const express = require("express");
+const { check, validationResult } = require("express-validator");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -11,45 +12,63 @@ const User = require("../../models/User");
  * @access Public
  */
 
-router.post("/register", (req, res) => {
-  let { name, email, password, confirm_password, role } = req.body;
-  if (password !== confirm_password) {
-    return res.status(400).json({
-      msg: "Password do not match.",
-    });
-  }
-
-  // Check for the unique Email
-  User.findOne({ email: email }).then((email) => {
-    if (email) {
+router.post(
+  "/register",
+  [
+    check("name", "Name is not valid").not().isEmpty().isString().isLength({
+      min: 8,
+    }),
+    check("email", "email is not valid").isEmail(),
+    check("password", "Password is not valid, it must be min 8 length and one capital letter").isLength({
+      min: 8,
+    }),
+  ],
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
       return res.status(400).json({
-        msg: "Email is already registred. Did you forgot your password.",
+        errors: errors.array(),
       });
     }
-  });
+    let { name, email, password, confirm_password, role } = req.body;
+    if (password !== confirm_password) {
+      return res.status(400).json({
+        msg: "Password do not match.",
+      });
+    }
 
-  // The data is valid and new register the user
-  let newUser = new User({
-    name,
-    email,
-    password,
-    role,
-  });
+    // Check for the unique Email
+    User.findOne({ email: email }).then((email) => {
+      if (email) {
+        return res.status(400).json({
+          msg: "Email is already registred. Did you forgot your password.",
+        });
+      }
+    });
 
-  // Hash the password
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(newUser.password, salt, (err, hash) => {
-      if (err) throw err;
-      newUser.password = hash;
-      newUser.save().then((user) => {
-        return res.status(201).json({
-          success: true,
-          msg: "Hurry! User is now registered.",
+    // The data is valid and new register the user
+    let newUser = new User({
+      name,
+      email,
+      password,
+      role,
+    });
+
+    // Hash the password
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(newUser.password, salt, (err, hash) => {
+        if (err) throw err;
+        newUser.password = hash;
+        newUser.save().then((user) => {
+          return res.status(201).json({
+            success: true,
+            msg: "Hurry! User is now registered.",
+          });
         });
       });
     });
-  });
-});
+  }
+);
 
 /*
  * @route POST api/users/login
@@ -58,10 +77,10 @@ router.post("/register", (req, res) => {
  */
 
 router.post("/login", (req, res) => {
-  User.findOne({ username: req.body.username }).then((user) => {
+  User.findOne({ email: req.body.email }).then((user) => {
     if (!user) {
       return res.status(400).json({
-        msg: "useranme is not found",
+        msg: "Email is not found",
         success: false,
       });
     }
@@ -79,6 +98,7 @@ router.post("/login", (req, res) => {
           res.status(200).json({
             success: true,
             token: `Bearer ${token}`,
+            user: user,
             msg: "Hurry! you are now logged in",
           });
         });
