@@ -2,6 +2,8 @@
   <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="container d-flex w justify-content-center">
       <div class="modal-dialog" role="document">
+        <!-- Error component -->
+        <Error v-if="error" :msg="error" />
         <div class="modal-content p-4">
           <button type="button" class="close x" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <div class="modal-header border-0 mb-2">
@@ -12,20 +14,23 @@
 
           <div class="modal-body">
             <!-- <h3 class="mb-4 title">Log In<br /></h3> -->
+            <!-- Email -->
             <div class="form-group">
               <input type="text" id="email" v-model="email" class="form-control p-0" required style="box-shadow: none; border-radius: 0px" />
               <label class="form-control-placeholder p-0" for="name">Email</label>
             </div>
+            <!-- Password -->
             <div class="form-group">
               <input type="password" id="password" v-model="password" class="form-control p-0" required style="box-shadow: none; border-radius: 0px" />
               <label class="form-control-placeholder p-0" for="password">Password</label>
             </div>
+            <!-- Remember checkbox -->
             <div class="form-group">
-              <input type="checkbox" id="box-1" />
+              <input type="checkbox" v-model="remember" id="box-1" />
               <label for="box-1">Remember me</label>
             </div>
           </div>
-          <div class="modal-footer border-0 mb-4"><button type="button" @click="loginUser" class="btn signup col-6 col-md-6" data-dismiss="modal">LOGIN</button></div>
+          <div class="modal-footer border-0 mb-4"><button type="button" @click="loginUser" class="btn signup col-6 col-md-6">LOGIN</button></div>
         </div>
       </div>
     </div>
@@ -33,13 +38,22 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import Error from "../Error.vue";
+import { mapActions, mapGetters } from "vuex";
+
 export default {
+  components: {
+    Error,
+  },
   data() {
     return {
       email: "",
       password: "",
+      remember: true,
     };
+  },
+  computed: {
+    ...mapGetters(["error"]),
   },
   methods: {
     ...mapActions(["login"]),
@@ -47,10 +61,12 @@ export default {
       let user = {
         email: this.email,
         password: this.password,
+        remember: this.remember,
       };
       this.login(user)
         .then((res) => {
           if (res.data.success) {
+            // this.$swal("Hello Vue world!!!");
             this.$router.push("/dashboard");
           }
         })

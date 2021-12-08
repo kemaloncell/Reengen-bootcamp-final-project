@@ -2,6 +2,8 @@
   <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="container d-flex justify-content-center">
       <div class="modal-dialog" role="document">
+        <!-- Error component -->
+        <Error v-if="error" :msg="error" />
         <div class="modal-content p-4">
           <button type="button" class="close x" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <div class="modal-header border-0 mb-2">
@@ -21,7 +23,6 @@
             <div class="form-group">
               <select v-model="role" class="form-control" required style="box-shadow: none; border-radius: 0px">
                 <option disabled selected>Please choose one</option>
-                <option selected>User</option>
                 <option>Admin</option>
                 <option>Editor</option>
               </select>
@@ -37,7 +38,8 @@
             </div>
             <label class="tc">By signing up I accept the <strong>Terms & Conditions</strong> of Daily</label>
           </div>
-          <div class="modal-footer border-0 mb-4"><button type="button" class="btn signup col-6 col-md-6" data-dismiss="modal" @click="registerUser">SIGNUP</button></div>
+          <div class="modal-footer border-0 mb-4"><button type="button" class="btn signup col-6 col-md-6" @click="registerUser">SIGNUP</button></div>
+          <!-- data-dismiss="modal" -->
         </div>
       </div>
     </div>
@@ -45,8 +47,12 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import Error from "../Error.vue";
+import { mapActions, mapGetters } from "vuex";
 export default {
+  components: {
+    Error,
+  },
   data() {
     return {
       name: "",
@@ -55,6 +61,9 @@ export default {
       password: "",
       confirm_password: "",
     };
+  },
+  computed: {
+    ...mapGetters(["error"]),
   },
   methods: {
     ...mapActions(["register"]),

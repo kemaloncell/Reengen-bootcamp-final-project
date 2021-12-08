@@ -41,6 +41,11 @@ mongoose
 const users = require("./routes/api/users");
 app.use("/api/users", users);
 
+//if any other request from api comes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/index.html"));
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);

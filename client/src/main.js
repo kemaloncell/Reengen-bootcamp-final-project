@@ -6,6 +6,9 @@ import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
 import vuetify from "./plugins/vuetify";
 import axios from "axios";
+import VueSweetalert2 from "vue-sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
+import i18n from "./locales/i18n";
 
 Vue.config.productionTip = false;
 
@@ -17,8 +20,10 @@ if (token) {
   Vue.prototype.$http.defaults.headers.common["Authorization"] = token;
 }
 
+Vue.use(VueSweetalert2);
 Vue.use(Vuetify);
 new Vue({
+  i18n,
   router,
   store,
   vuetify,
