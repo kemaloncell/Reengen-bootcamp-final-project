@@ -14,11 +14,11 @@
             </div>
             <div class="form-group">
               <label>Membership Date</label>
-              <input type="date" class="form-control" v-model="membership_date" required />
+              <input type="date" class="form-control" v-model="start_date" required />
             </div>
             <div class="form-group">
               <label>Membership End Date</label>
-              <input type="date" class="form-control" v-model="membership_end_date" required />
+              <input type="date" class="form-control" v-model="end_date" required />
             </div>
             <div class="form-group">
               <label>Employees Number</label>
@@ -50,8 +50,8 @@ export default {
   data() {
     return {
       company_name: "",
-      membership_date: "",
-      membership_end_date: "",
+      start_date: "",
+      end_date: "",
       employees_number: "",
       special_member: "",
     };
@@ -60,8 +60,8 @@ export default {
     // We set the data from props as v-model value
     updateData() {
       this.company_name = this.$props.updateData.company_name;
-      this.membership_date = this.$props.updateData.membership_date;
-      this.membership_end_date = this.$props.updateData.membership_end_date;
+      this.start_date = this.$props.updateData.start_date;
+      this.end_date = this.$props.updateData.end_date;
       this.employees_number = this.$props.updateData.employees_number;
       this.special_member = this.$props.updateData.special_member;
     },
@@ -71,17 +71,20 @@ export default {
     updateTableData() {
       let payload = {
         company_name: this.company_name,
-        membership_date: this.membership_date,
-        membership_end_date: this.membership_end_date,
+        start_date: this.start_date,
+        end_date: this.end_date,
         employees_number: this.employees_number,
         special_member: this.special_member,
       };
-
-      this.updateFactory(payload).then(() => {
-        this.$swal({ title: "Good job", text: "Update successful!", type: "success" }).then(function () {
-          location.reload();
+      if (this.company_name !== "" && this.start_date !== "" && this.end_date !== "" && this.employees_number !== "") {
+        this.updateFactory(payload).then(() => {
+          this.$swal({ title: "Good job", text: "Update successful!", type: "success" }).then(function () {
+            location.reload();
+          });
         });
-      });
+      } else {
+        this.$swal("Please fill in the blanks");
+      }
     },
   },
 };

@@ -4,7 +4,7 @@
       <div class="modal-content">
         <form @submit.prevent="">
           <div class="modal-header">
-            <h4 class="modal-title">Delete Factroy Data</h4>
+            <h4 class="modal-title">Delete Column Name</h4>
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           </div>
           <div class="modal-body">
@@ -30,13 +30,12 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["deleteFactory"]),
+    ...mapActions(["deleteColumn"]),
     deleteTableData() {
       let payload = {
-        company_name: this.deleteData,
+        column_name: this.deleteData,
       };
-      this.deleteFactory(payload).then(() => {
-        // this.$swal("Delete Successful");
+      this.deleteColumn(payload).then(() => {
         this.$swal({ title: "Good job", text: "Deletion successful!", type: "success" }).then(function () {
           location.reload();
         });

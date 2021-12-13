@@ -2,7 +2,7 @@
   <div class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form>
+        <form @submit.prevent="">
           <div class="modal-header">
             <h4 class="modal-title">Add Employee</h4>
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -10,12 +10,12 @@
           <div class="modal-body">
             <div class="form-group">
               <label>Column Name</label>
-              <input v-model="column_name" type="text" class="form-control" required />
+              <input v-model="column_name" placeholder="exp. column_name or column" type="text" class="form-control" required />
             </div>
 
             <label>Column Type</label>
-            <select v-model="column_type" class="browser-default custom-select">
-              <option v-for="items in columnTypes" :key="items">{{ items }}</option>
+            <select v-model="column_type" class="browser-default custom-select" required>
+              <option v-for="(items, i) in columnTypes" :key="i">{{ items }}</option>
             </select>
           </div>
           <div class="modal-footer">
@@ -79,9 +79,15 @@ export default {
         column_type: this.column_type,
         column_name: this.column_name,
       };
-      this.register(addColumn).then(() => {
-        this.$router.push("/");
-      });
+      if (this.column_name !== "" && this.column_type !== "") {
+        this.addColumn(addColumn).then(() => {
+          this.$swal({ title: "Good job", text: "Update successful!", type: "success" }).then(function () {
+            location.reload();
+          });
+        });
+      } else {
+        this.$swal("Please fill in the blanks");
+      }
     },
   },
 };

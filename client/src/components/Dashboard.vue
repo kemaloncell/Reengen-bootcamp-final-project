@@ -18,7 +18,7 @@
                       <div class="table-title">
                         <div class="row">
                           <div class="col-sm-6">
-                            <h2>Manage <b>Employees</b></h2>
+                            <h2>Factory <b>List</b></h2>
                           </div>
                           <div class="col-sm-6">
                             <a href="#addColumnModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Column</span></a>
@@ -28,41 +28,25 @@
                       </div>
                       <table class="table table-striped table-hover">
                         <thead>
-                          <tr v-for="(items, i) in columnNames" :key="i + 1">
-                            <th>{{ items[0].column_name }}</th>
-                            <th>
-                              <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                              Company Name
-                            </th>
-                            <th>
-                              <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                              Membership Date
-                            </th>
-                            <th>
-                              <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                              Membership End Date
-                            </th>
-                            <th>
-                              <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                              Employees Number
-                            </th>
-                            <th>
-                              <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                              Special Member
+                          <tr>
+                            <th v-for="(items, i) in columnNames" :key="i + 1">
+                              <a href="#deleteColumnModal" @click="deleteColumnData(items.column_name)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                              <!-- Company Name -->
+                              {{ items.column_name.replace("_", " ").toUpperCase() }}
                             </th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr v-for="(items, i) in factories" :key="i">
                             <td>{{ items.company_name }}</td>
-                            <td>{{ items.membership_date }}</td>
-                            <td>{{ items.membership_end_date }}</td>
+                            <td>{{ items.start_date }}</td>
+                            <td>{{ items.end_date }}</td>
                             <td>{{ items.employees_number }}</td>
                             <td>{{ items.special_member }}</td>
 
                             <td>
                               <a href="#updateRowModal" @click="updateData(items)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                              <a href="#deleteRowModal" @click="deleteData(items.company_name)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                              <a href="#deleteRowModal" @click="deleteRowData(items.company_name)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
                           </tr>
                         </tbody>
@@ -206,7 +190,11 @@
     <!-- Edit Modal End -->
 
     <!-- Delete Modal Start -->
-    <delete-row-modal id="deleteRowModal" :deleteData="deleteDataName"></delete-row-modal>
+    <delete-row-modal id="deleteRowModal" :deleteData="deleteRowName"></delete-row-modal>
+    <!-- Delete Modal End -->
+
+    <!-- Delete Modal Start -->
+    <delete-column-modal id="deleteColumnModal" :deleteData="deleteColumnName"></delete-column-modal>
     <!-- Delete Modal End -->
   </div>
 </template>
@@ -215,39 +203,49 @@
 import updateRowModal from "../components/modals/UpdateRowModal.vue";
 import addColumnModal from "../components/modals/AddColumnModal.vue";
 import deleteRowModal from "../components/modals/DeleteRowModal.vue";
+import deleteColumnModal from "../components/modals/DeleteColumnModal.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   components: {
     addColumnModal,
     updateRowModal,
     deleteRowModal,
+    deleteColumnModal,
   },
   data() {
     return {
       // props data
       updateDatas: "",
-      deleteDataName: "",
+      deleteRowName: "",
+      deleteColumnName: "",
     };
   },
   created() {
     this.getAllFactory();
-    this.getAllColumn();
+    this.getAllColumns();
   },
   computed: {
     ...mapGetters(["factories", "columnNames"]),
   },
   methods: {
-    ...mapActions(["getAllFactory", "getAllColumn"]),
+    ...mapActions(["getAllFactory", "getAllColumns"]),
     // Send to update modal
     updateData(updateDataEvent) {
       if (updateDataEvent !== null || updateDataEvent !== "") {
         this.updateDatas = updateDataEvent;
       }
     },
-    // Send to delete modal
-    deleteData(deleteDataEvent) {
+    // Send to deleteRowModal
+    deleteRowData(deleteDataEvent) {
       if (deleteDataEvent !== null || deleteDataEvent !== "") {
-        this.deleteDataName = deleteDataEvent;
+        this.deleteRowName = deleteDataEvent;
+      }
+    },
+
+    // Send to deleteColumnModal
+    deleteColumnData(deleteDataEvent) {
+      if (deleteDataEvent !== null || deleteDataEvent !== "") {
+        this.deleteColumnName = deleteDataEvent;
       }
     },
   },
@@ -312,6 +310,7 @@ table.table tr td {
   border-color: #e9e9e9;
   padding: 12px 15px;
   vertical-align: middle;
+  text-align: center;
 }
 
 table.table-striped tbody tr:nth-of-type(odd) {
@@ -355,95 +354,13 @@ table.table .avatar {
   vertical-align: middle;
   margin-right: 10px;
 }
-.pagination {
-  float: right;
-  margin: 0 0 5px;
-}
-.pagination li a {
-  border: none;
-  font-size: 13px;
-  min-width: 30px;
-  min-height: 30px;
-  color: #999;
-  margin: 0 2px;
-  line-height: 30px;
-  border-radius: 2px !important;
-  text-align: center;
-  padding: 0 6px;
-}
-.pagination li a:hover {
-  color: #666;
-}
-.pagination li.active a,
-.pagination li.active a.page-link {
-  background: #03a9f4;
-}
-.pagination li.active a:hover {
-  background: #0397d6;
-}
-.pagination li.disabled i {
-  color: #ccc;
-}
-.pagination li i {
-  font-size: 16px;
-  padding-top: 6px;
-}
+
 .hint-text {
   float: left;
   margin-top: 10px;
   font-size: 13px;
 }
-/* Custom checkbox */
-.custom-checkbox {
-  position: relative;
-}
-.custom-checkbox input[type="checkbox"] {
-  opacity: 0;
-  position: absolute;
-  margin: 5px 0 0 3px;
-  z-index: 9;
-}
-.custom-checkbox label:before {
-  width: 18px;
-  height: 18px;
-}
-.custom-checkbox label:before {
-  content: "";
-  margin-right: 10px;
-  display: inline-block;
-  vertical-align: text-top;
-  background: white;
-  border: 1px solid #bbb;
-  border-radius: 2px;
-  box-sizing: border-box;
-  z-index: 2;
-}
-.custom-checkbox input[type="checkbox"]:checked + label:after {
-  content: "";
-  position: absolute;
-  left: 6px;
-  top: 3px;
-  width: 6px;
-  height: 11px;
-  border: solid #000;
-  border-width: 0 3px 3px 0;
-  transform: inherit;
-  z-index: 3;
-  transform: rotateZ(45deg);
-}
-.custom-checkbox input[type="checkbox"]:checked + label:before {
-  border-color: #03a9f4;
-  background: #03a9f4;
-}
-.custom-checkbox input[type="checkbox"]:checked + label:after {
-  border-color: #fff;
-}
-.custom-checkbox input[type="checkbox"]:disabled + label:before {
-  color: #b8b8b8;
-  cursor: auto;
-  box-shadow: none;
-  background: #ddd;
-}
+
 /* Modal styles */
 .modal .modal-dialog {
   max-width: 400px;

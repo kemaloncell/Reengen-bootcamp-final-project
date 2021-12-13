@@ -10,6 +10,7 @@ const state = {
 const getters = {
   factoryState: (state) => state.status,
   factories: (state) => state.factories,
+  columnNames: (state) => state.columnNames,
 };
 
 const actions = {
@@ -37,11 +38,11 @@ const actions = {
 
   // Delete Factory Row
   async deleteFactory({ commit }, companyName) {
-    commit("delete_request");
+    commit("delete_row_request");
     try {
       let res = await axios.delete("http://localhost:5000/api/factories/deleteFactory", { data: { company_name: companyName } });
       if (res.data.success !== undefined) {
-        commit("delete_success");
+        commit("delete_row_success");
       }
       return res;
     } catch (err) {
@@ -50,10 +51,10 @@ const actions = {
   },
 
   //Get Column
-  async getAllColumn({ commit }) {
+  async getAllColumns({ commit }) {
     commit("get_column_request");
     let res = await axios.get("http://localhost:5000/api/factories/getFactoryColumn");
-    commit("get_column", res.data.columns);
+    commit("get_columns", res.data.columns);
     return res;
   },
 
@@ -63,6 +64,20 @@ const actions = {
     try {
       let res = await axios.post("http://localhost:5000/api/factories/createFactoryColumn", addColumn);
       commit("add_column_success");
+      return res;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  // Delete Column
+  async deleteColumn({ commit }, columnName) {
+    commit("delete_column_request");
+    try {
+      let res = await axios.delete("http://localhost:5000/api/factories/deleteFactoryColumn", { data: { column_name: columnName } });
+      if (res.data.success !== undefined) {
+        commit("delete_column_success");
+      }
       return res;
     } catch (err) {
       console.log(err);
@@ -83,23 +98,29 @@ const mutations = {
   update_success(state) {
     state.status = "success";
   },
-  delete_request(state) {
+  delete_row_request(state) {
     state.status = "loading";
   },
-  delete_success(state) {
+  delete_row_success(state) {
     state.status = "success";
   },
 
   get_column_request(state) {
     state.status = "loading";
   },
-  get_column(state, columnNames) {
+  get_columns(state, columnNames) {
     state.columnNames = columnNames;
   },
   add_column_request(state) {
     state.status = "loading";
   },
   add_column_success(state) {
+    state.status = "success";
+  },
+  delete_column_request(state) {
+    state.status = "loading";
+  },
+  delete_column_success(state) {
     state.status = "success";
   },
 };

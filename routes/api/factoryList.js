@@ -28,9 +28,9 @@ const getFactory = (request, response) => {
 
 // Create factories
 const createFactory = (request, response) => {
-  const { company_name, membership_date, membership_end_date, employees_number, special_member } = request.body;
+  const { company_name, start_date, end_date, employees_number, special_member } = request.body;
 
-  client.query("INSERT INTO factory_list VALUES ($1, $2, $3, $4, $5)", [company_name, membership_date, membership_end_date, employees_number, special_member], (err, res) => {
+  client.query("INSERT INTO factory_list VALUES ($1, $2, $3, $4, $5)", [company_name, start_date, end_date, employees_number, special_member], (err, res) => {
     if (!err) {
       response.status(200).json(`user ${company_name} ${employees_number}, created`);
     } else {
@@ -41,9 +41,9 @@ const createFactory = (request, response) => {
 
 // Update factories
 const updateFactory = (request, response) => {
-  const { company_name, membership_date, membership_end_date, employees_number, special_member } = request.body;
+  const { company_name, start_date, end_date, employees_number, special_member } = request.body;
 
-  client.query("UPDATE factory_list SET company_name = $1,membership_date = $2,membership_end_date=$3,employees_number = $4, special_member=$5 WHERE company_name = $1", [company_name, membership_date, membership_end_date, employees_number, special_member], (err, res) => {
+  client.query("UPDATE factory_list SET company_name = $1, start_date = $2, end_date=$3, employees_number = $4, special_member=$5 WHERE company_name = $1", [company_name, start_date, end_date, employees_number, special_member], (err, res) => {
     if (!err) {
       response.status(200).json(`user ${company_name} ${employees_number}, updated`);
     } else {
@@ -90,7 +90,7 @@ const createFactoryColumn = (request, response) => {
 
 // Delete Factory Column
 const deleteFactoryColumn = (request, response) => {
-  const { column_name } = request.body;
+  const { column_name } = request.body.column_name;
 
   client.query(`ALTER TABLE factory_list DROP COLUMN ${column_name} `, (err, res) => {
     if (!err) {
@@ -104,10 +104,10 @@ const deleteFactoryColumn = (request, response) => {
 // convert to date format
 function dateConverter(result_rows, result_length) {
   for (let i = 0; i < result_length; i++) {
-    const _startDate = new Date(`${result_rows[i].membership_date}`).toISOString().split("T")[0];
-    const _endDate = new Date(`${result_rows[i].membership_end_date}`).toISOString().split("T")[0];
-    result_rows[i].membership_date = _startDate;
-    result_rows[i].membership_end_date = _endDate;
+    const _startDate = new Date(`${result_rows[i].start_date}`).toISOString().split("T")[0];
+    const _endDate = new Date(`${result_rows[i].end_date}`).toISOString().split("T")[0];
+    result_rows[i].start_date = _startDate;
+    result_rows[i].end_date = _endDate;
   }
 }
 
