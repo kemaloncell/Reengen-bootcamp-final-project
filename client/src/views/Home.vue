@@ -13,7 +13,7 @@
           <div class="card-body">
             <h5 class="card-title">MongoDB</h5>
             <p class="card-text">{{ $t("message.MongoDb") }}</p>
-            <a href="https://www.mongodb.com/" target="_blank" class="btn bg-white">More Info.</a>
+            <a href="https://www.mongodb.com/" target="_blank" class="btn bg-white">{{ $t("message.HomeBtn") }}</a>
           </div>
         </div>
       </div>
@@ -22,7 +22,7 @@
           <div class="card-body">
             <h5 class="card-title">PostgreSQL</h5>
             <p class="card-text">{{ $t("message.PostgreSQL") }}</p>
-            <a href="https://www.postgresql.org/" target="_blank" class="btn bg-white">More Info.</a>
+            <a href="https://www.postgresql.org/" target="_blank" class="btn bg-white">{{ $t("message.HomeBtn") }}</a>
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@
           <div class="card-body">
             <h5 class="card-title">Vue.js</h5>
             <p class="card-text">{{ $t("message.VueJs") }}</p>
-            <a href="https://vuejs.org/" target="_blank" class="btn bg-white">More Info.</a>
+            <a href="https://vuejs.org/" target="_blank" class="btn bg-white">{{ $t("message.HomeBtn") }}</a>
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@
           <div class="card-body">
             <h5 class="card-title">Node.js</h5>
             <p class="card-text">{{ $t("message.NodeJs") }}</p>
-            <a href="https://nodejs.org/" target="_blank" class="btn bg-white">More Info.</a>
+            <a href="https://nodejs.org/" target="_blank" class="btn bg-white">{{ $t("message.HomeBtn") }}</a>
           </div>
         </div>
       </div>

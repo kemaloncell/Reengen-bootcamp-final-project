@@ -59,7 +59,6 @@ export default {
     LoginModal,
     RegisterModal,
   },
-
   created() {
     // get user name
     this.getProfile();

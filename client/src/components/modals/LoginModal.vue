@@ -26,7 +26,7 @@
             </div>
             <!-- Remember checkbox -->
             <div class="form-group">
-              <input type="checkbox" v-model="remember" id="box-1" />
+              <input type="checkbox" v-model="rememberMe" id="box-1" />
               <label for="box-1">Remember me</label>
             </div>
           </div>
@@ -49,7 +49,7 @@ export default {
     return {
       email: "",
       password: "",
-      remember: true,
+      rememberMe: null,
     };
   },
   computed: {
@@ -58,11 +58,17 @@ export default {
   methods: {
     ...mapActions(["login"]),
     loginUser() {
+      if (this.rememberMe) {
+        localStorage.setItem("email", this.email);
+        localStorage.setItem("pass", this.password);
+        this.email = localStorage.getItem("email");
+        this.password = localStorage.getItem("pass");
+      }
       let user = {
         email: this.email,
         password: this.password,
-        remember: this.remember,
       };
+
       this.login(user)
         .then((res) => {
           if (res.data.success) {

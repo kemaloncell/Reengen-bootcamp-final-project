@@ -117,37 +117,16 @@ router.post("/login", (req, res) => {
           _id: user._id,
           name: user.name,
           email: user.email,
-          remember: user.remember,
           role: user.role,
         };
-        //    window.localStorage.setItem("token", token);
-        // if (!req.body.remember_me) { return next(); } bodyden sadece chehck işareti gelmeli checked 1 yıl değilse 1 gün olabilir
-        // anahtarı kaydet yoksa geç issue a remember me cookie if the option was checked
-        /* if (req.body.remember) {
-    req.session.cookie.maxAge = 2592000000; // 30*24*60*60*1000 Rememeber 'me' for 30 days
-  } else {
-    req.session.cookie.expires = false;
-  } */
-        console.log(req.body.remember);
-        if (req.body.remember) {
-          jwt.sign(payload, key, { expiresIn: 604800 }, (err, token) => {
-            res.status(200).json({
-              success: true,
-              token: `Bearer ${token}`,
-              user: user,
-              msg: "Hurry! you are now logged in",
-            });
+        jwt.sign(payload, key, { expiresIn: 604800 }, (err, token) => {
+          res.status(200).json({
+            success: true,
+            token: `Bearer ${token}`,
+            user: user,
+            msg: "Hurry! you are now logged in",
           });
-        } else {
-          jwt.sign(payload, key, { expiresIn: 604800 }, (err, token) => {
-            res.status(200).json({
-              success: true,
-              token: `Bearer ${token}`,
-              user: user,
-              msg: "Hurry! you are now logged in",
-            });
-          });
-        }
+        });
       } else {
         return res.status(404).json({
           success: false,

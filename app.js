@@ -27,9 +27,9 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 //Bring in the Database Config and connect with the Database
-const db = require("./config/keys").mongoURI;
+const mongoDB = require("./config/keys").mongoURI;
 mongoose
-  .connect(db, { useNewUrlParser: true })
+  .connect(mongoDB, { useNewUrlParser: true })
   .then(() => {
     console.log(`Database connected successfully`);
   })
@@ -37,9 +37,27 @@ mongoose
     console.log(`Unable to connect with the database ${err}`);
   });
 
-//Bring the Users route
+//Bring the Users route (the first of two different ways)
 const users = require("./routes/api/users");
 app.use("/api/users", users);
+
+//Bring the factoryList route
+/* const factoryList = require("./routes/api/factories/factoryList");
+app.use("/api/factories/factoryList", factoryList); */
+
+/* const factoryList = require("./routes/api/factoryList");
+app.use("/api/factoryList", factoryList); */
+
+//the second of two different ways
+const factoryList = require("./routes/api/factoryList");
+app.get("/api/factories/getAllFactory", factoryList.getAllFactory);
+app.post("/api/factories/getFactory", factoryList.getFactory);
+app.post("/api/factories/createFactory", factoryList.createFactory);
+app.put("/api/factories/updateFactory", factoryList.updateFactory);
+app.delete("/api/factories/deleteFactory", factoryList.deleteFactory);
+app.get("/api/factories/getFactoryColumn", factoryList.getFactoryColumn);
+app.post("/api/factories/createFactoryColumn", factoryList.createFactoryColumn);
+app.delete("/api/factories/deleteFactoryColumn", factoryList.deleteFactoryColumn);
 
 //if any other request from api comes
 app.get("*", (req, res) => {
