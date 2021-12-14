@@ -74,6 +74,7 @@ export default {
     ...mapActions(["logout", "getProfile"]),
     logoutUser() {
       this.logout();
+      window.location.reload();
     },
 
     // method of language

@@ -1,5 +1,3 @@
-const express = require("express");
-const router = express.Router();
 const client = require("../../config/db");
 
 // Get all factories
@@ -14,38 +12,13 @@ const getAllFactory = (request, response) => {
   });
 };
 
-// Get factory
-const getFactory = (request, response) => {
-  const { company_name } = request.body;
-  client.query("SELECT * FROM factory_list WHERE company_name = $1 ", [company_name], (err, res) => {
-    if (!err) {
-      response.status(200).json(res.rows);
-    } else {
-      throw err;
-    }
-  });
-};
-
-// Create factories
-const createFactory = (request, response) => {
-  const { company_name, start_date, end_date, employees_number, special_member } = request.body;
-
-  client.query("INSERT INTO factory_list VALUES ($1, $2, $3, $4, $5)", [company_name, start_date, end_date, employees_number, special_member], (err, res) => {
-    if (!err) {
-      response.status(200).json(`user ${company_name} ${employees_number}, created`);
-    } else {
-      throw err;
-    }
-  });
-};
-
 // Update factories
 const updateFactory = (request, response) => {
   const { company_name, start_date, end_date, employees_number, special_member } = request.body;
 
   client.query("UPDATE factory_list SET company_name = $1, start_date = $2, end_date=$3, employees_number = $4, special_member=$5 WHERE company_name = $1", [company_name, start_date, end_date, employees_number, special_member], (err, res) => {
     if (!err) {
-      response.status(200).json(`user ${company_name} ${employees_number}, updated`);
+      response.status(200).json(`factory data updated`);
     } else {
       throw err;
     }
@@ -111,4 +84,4 @@ function dateConverter(result_rows, result_length) {
   }
 }
 
-module.exports = { getAllFactory, createFactory, updateFactory, getFactory, deleteFactory, getFactoryColumn, createFactoryColumn, deleteFactoryColumn };
+module.exports = { getAllFactory, updateFactory, deleteFactory, getFactoryColumn, createFactoryColumn, deleteFactoryColumn };

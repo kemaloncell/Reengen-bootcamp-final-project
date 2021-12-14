@@ -49,15 +49,23 @@ app.use("/api/factories/factoryList", factoryList); */
 app.use("/api/factoryList", factoryList); */
 
 //the second of two different ways
+// FACTORY LIST
 const factoryList = require("./routes/api/factoryList");
 app.get("/api/factories/getAllFactory", factoryList.getAllFactory);
-app.post("/api/factories/getFactory", factoryList.getFactory);
-app.post("/api/factories/createFactory", factoryList.createFactory);
 app.put("/api/factories/updateFactory", factoryList.updateFactory);
 app.delete("/api/factories/deleteFactory", factoryList.deleteFactory);
 app.get("/api/factories/getFactoryColumn", factoryList.getFactoryColumn);
 app.post("/api/factories/createFactoryColumn", factoryList.createFactoryColumn);
 app.delete("/api/factories/deleteFactoryColumn", factoryList.deleteFactoryColumn);
+
+// FACTORY NAME
+const factoryName = require("./routes/api/factoryName");
+app.get("/api/factories/getAllFactoryName", factoryName.getAllFactoryName);
+app.put("/api/factories/updateFactoryName", factoryName.updateFactoryName);
+app.delete("/api/factories/deleteFactoryName", factoryName.deleteFactoryName);
+app.get("/api/factories/getFactoryNameColumn", factoryName.getFactoryNameColumn);
+app.post("/api/factories/createFactoryNameColumn", factoryName.createFactoryNameColumn);
+app.delete("/api/factories/deleteFactoryNameColumn", factoryName.deleteFactoryNameColumn);
 
 //if any other request from api comes
 app.get("*", (req, res) => {

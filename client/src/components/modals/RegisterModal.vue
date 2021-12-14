@@ -36,6 +36,7 @@
               <input type="password" id="confirm_password" v-model="confirm_password" class="form-control p-0" required style="box-shadow: none; border-radius: 0px" />
               <label class="form-control-placeholder p-0" for="password">Confirm Password</label>
             </div>
+
             <label class="tc">By signing up I accept the <strong>Terms & Conditions</strong> of Daily</label>
           </div>
           <div class="modal-footer border-0 mb-4"><button type="button" class="btn signup col-6 col-md-6" @click="registerUser">SIGNUP</button></div>

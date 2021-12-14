@@ -10,7 +10,7 @@
           <div class="modal-body">
             <div class="form-group">
               <label>Column Name</label>
-              <input v-model="column_name" placeholder="exp. column_name or column" type="text" class="form-control" required />
+              <input v-model="column_name" placeholder="e.g. column_name or column" type="text" class="form-control" required />
             </div>
 
             <label>Column Type</label>
@@ -73,20 +73,22 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["addColumn"]),
+    ...mapActions(["factoryAddColumn"]),
     addFactoryColumn() {
       let addColumn = {
         column_type: this.column_type,
         column_name: this.column_name,
       };
-      if (this.column_name !== "" && this.column_type !== "") {
-        this.addColumn(addColumn).then(() => {
+      if (this.column_name === "" && this.column_type === "") {
+        this.$swal("Please fill in the blanks");
+      } else if (this.column_name.indexOf(" ") > 0) {
+        this.$swal("Please fill in the column name without spaces eg. column_name");
+      } else {
+        this.factoryAddColumn(addColumn).then(() => {
           this.$swal({ title: "Good job", text: "Update successful!", type: "success" }).then(function () {
             location.reload();
           });
         });
-      } else {
-        this.$swal("Please fill in the blanks");
       }
     },
   },

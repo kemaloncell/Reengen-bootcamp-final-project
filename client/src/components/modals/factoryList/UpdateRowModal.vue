@@ -13,11 +13,11 @@
               <input type="text" class="form-control" v-model="company_name" required />
             </div>
             <div class="form-group">
-              <label>Membership Date</label>
+              <label>Start Date</label>
               <input type="date" class="form-control" v-model="start_date" required />
             </div>
             <div class="form-group">
-              <label>Membership End Date</label>
+              <label>End Date</label>
               <input type="date" class="form-control" v-model="end_date" required />
             </div>
             <div class="form-group">

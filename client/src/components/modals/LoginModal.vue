@@ -58,7 +58,7 @@ export default {
   methods: {
     ...mapActions(["login"]),
     loginUser() {
-      if (this.rememberMe) {
+      if (this.rememberMe === true) {
         localStorage.setItem("email", this.email);
         localStorage.setItem("pass", this.password);
         this.email = localStorage.getItem("email");
@@ -72,8 +72,9 @@ export default {
       this.login(user)
         .then((res) => {
           if (res.data.success) {
-            // this.$swal("Hello Vue world!!!");
-            this.$router.push("/dashboard");
+            this.$swal({ title: "Good job", text: "You have successfully logged in", type: "success" }).then(() => {
+              window.location = "http://localhost:8080/dashboard";
+            });
           }
         })
         .catch((err) => {
