@@ -8,5 +8,15 @@ export default {
     VueJs: "Vue.js features an incrementally adoptable architecture that focuses on declarative rendering and component composition. Advanced features required for complex applications such as routing...",
     NodeJs: "As an asynchronous event driven JavaScript runtime, Node is designed to build scalable network applications.",
     MongoDb: "MongoDB is a cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schemata. MongoDB is developed by MongoDB Inc.",
+    // Navbar
+    navbarLeftSide: "Welcome",
+    LogIn: "Log In",
+    SignUp: "Sign Up",
+    Logout: "Logout",
+    Lang: "Lang",
+    English: "English",
+    Turkish: "Turkish",
+    Available: "Available",
+    Dashboard: "Dashboard",
   },
 };

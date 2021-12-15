@@ -58,12 +58,16 @@ export default {
   methods: {
     ...mapActions(["login"]),
     loginUser() {
-      if (this.rememberMe === true) {
+      if (this.rememberMe && this.email !== "" && this.password !== "") {
         localStorage.setItem("email", this.email);
         localStorage.setItem("pass", this.password);
         this.email = localStorage.getItem("email");
         this.password = localStorage.getItem("pass");
+      } else {
+        localStorage.email = "";
+        localStorage.pass = "";
       }
+
       let user = {
         email: this.email,
         password: this.password,

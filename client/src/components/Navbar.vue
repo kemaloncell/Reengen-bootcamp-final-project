@@ -4,25 +4,24 @@
       <div class="container-fluid">
         <!-- for mobil nav -->
         <a class="navbar-brand" href="/" v-if="user"
-          >Welcome <b>{{ user.name }}</b></a
-        ><button data-toggle="collapse" aria-hidden="true" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+          >{{ $t("message.navbarLeftSide") }} <b>{{ user.name }}</b>
+        </a>
+        <button data-toggle="collapse" aria-hidden="true" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
 
         <div class="collapse navbar-collapse" id="navcol-1">
           <ul class="nav navbar-nav ml-auto">
             <li class="nav-item" v-if="!isLoggedIn">
-              <!-- <router-link class="nav-link" to="/login" tag="a"><i class="fa fa-sign-in"></i> Login</router-link> -->
-              <a class="nav-link" data-toggle="modal" role="button" data-target="#login"><i class="fa fa-sign-in"> </i> Log In</a>
+              <a class="nav-link" data-toggle="modal" role="button" data-target="#login"><i class="fa fa-sign-in"> </i> {{ $t("message.LogIn") }}</a>
             </li>
             <li class="nav-item" v-if="!isLoggedIn">
-              <!--  <router-link class="nav-link" to="#register" tag="a"><i class="fa fa-user-plus"></i> Register</router-link> -->
-              <a class="nav-link" data-toggle="modal" role="button" data-target="#register"><i class="fa fa-user-plus"> </i> Sign Up</a>
+              <a class="nav-link" data-toggle="modal" role="button" data-target="#register"><i class="fa fa-user-plus"> </i> {{ $t("message.SignUp") }}</a>
             </li>
             <!-- Language -->
             <li class="nav-item dropdown ml-2">
-              <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"><i class="fas fa-globe"></i> Lang</a>
+              <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"><i class="fas fa-globe"></i> {{ $t("message.Lang") }}</a>
               <div class="dropdown-menu" aria-labelledby="dropdown09">
-                <a class="dropdown-item" role="button" @click="changeLanguage('en')"><img src="../assets/united-kingdom.png" width="20" height="20" alt="flag" /> English</a>
-                <a class="dropdown-item" role="button" @click="changeLanguage('tr')"><img src="../assets/turkey.png" width="20" height="20" alt="flag" /> Turkish</a>
+                <a class="dropdown-item" role="button" @click="changeLanguage('en')"><img src="../assets/united-kingdom.png" width="20" height="20" alt="flag" /> {{ $t("message.English") }} </a>
+                <a class="dropdown-item" role="button" @click="changeLanguage('tr')"><img src="../assets/turkey.png" width="20" height="20" alt="flag" /> {{ $t("message.Turkish") }} </a>
               </div>
             </li>
             <!-- User Settings -->
@@ -31,11 +30,10 @@
               <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                 <div class="nav-user-info">
                   <h5 class="mb-0 text-white nav-user-name" v-if="user">{{ user.name }}</h5>
-                  <span class="status"></span><span class="ml-2">Available</span>
+                  <span class="status"></span><span class="ml-2">{{ $t("message.Available") }}</span>
                 </div>
-                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
-                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
-                <a class="dropdown-item" @click.prevent="logoutUser"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                <a class="dropdown-item" href="/dashboard"><i class="fas fa-columns mr-2"></i>{{ $t("message.Dashboard") }}</a>
+                <a class="dropdown-item" @click.prevent="logoutUser"><i class="fas fa-power-off mr-2"></i>{{ $t("message.Logout") }}</a>
               </div>
             </li>
           </ul>

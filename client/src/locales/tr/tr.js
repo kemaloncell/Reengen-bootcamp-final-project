@@ -8,5 +8,15 @@ export default {
     VueJs: "Vue.js, bildirimsel işleme ve bileşen kompozisyonuna odaklanan aşamalı olarak uyarlanabilir bir mimariye sahiptir. Yönlendirme gibi karmaşık uygulamalar için gereken gelişmiş özellikler...",
     NodeJs: "Asenkron olaya dayalı bir JavaScript çalışma zamanı olarak Node, ölçeklenebilir ağ uygulamaları oluşturmak için tasarlanmıştır.",
     MongoDb: "MongoDB, platformlar arası belge odaklı bir veritabanı programıdır. NoSQL veritabanı programı olarak sınıflandırılan MongoDB, şemalarla birlikte JSON benzeri belgeler kullanır. MongoDB, MongoDB Inc. tarafından geliştirilmiştir.",
+    // Navbar
+    navbarLeftSide: "Hoşgeldiniz",
+    LogIn: "Giriş Yap",
+    SignUp: "Kayıt Ol",
+    Logout: "Çıkış Yap",
+    Lang: "Dil",
+    English: "İngilizce",
+    Turkish: "Türkçe",
+    Available: "Mevcut",
+    Dashboard: "Gösterge Paneli",
   },
 };
