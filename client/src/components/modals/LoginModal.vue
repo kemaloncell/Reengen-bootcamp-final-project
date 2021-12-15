@@ -8,12 +8,8 @@
           <button type="button" class="close x" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <div class="modal-header border-0 mb-2">
             <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-
-            <!-- <button type="button" class="close" aria-label="Close" data-target="#register" disabled="true"><span aria-hidden="true">Log in</span></button> -->
           </div>
-
           <div class="modal-body">
-            <!-- <h3 class="mb-4 title">Log In<br /></h3> -->
             <!-- Email -->
             <div class="form-group">
               <input type="text" id="email" v-model="email" class="form-control p-0" required style="box-shadow: none; border-radius: 0px" />

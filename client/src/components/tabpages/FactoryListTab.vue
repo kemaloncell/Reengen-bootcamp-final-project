@@ -24,9 +24,6 @@
                   <a href="#deleteColumnModal" @click="deleteColumnData(items.column_name)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                   <!-- Company Name -->
                   {{ items.column_name.replace("_", " ").toUpperCase() }}
-
-                  <!-- <a @click="sortData()"><i class="fas fa-sort" title="sort"></i></a> -->
-                  <a @click="sortData()"><i class="fas fa-sort" title="sort"></i></a>
                 </th>
               </tr>
             </thead>
@@ -115,11 +112,6 @@ export default {
       if (deleteDataEvent !== null || deleteDataEvent !== "") {
         this.deleteColumnName = deleteDataEvent;
       }
-    },
-
-    // Sort method
-    sortData(e) {
-      console.log(e);
     },
   },
 };

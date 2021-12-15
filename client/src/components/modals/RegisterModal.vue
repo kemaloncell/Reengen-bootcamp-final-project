@@ -4,14 +4,13 @@
       <div class="modal-dialog" role="document">
         <!-- Error component -->
         <Error v-if="error" :msg="error" />
+
         <div class="modal-content p-4">
           <button type="button" class="close x" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <div class="modal-header border-0 mb-2">
             <h5 class="modal-title" id="exampleModalLabel">Register</h5>
-            <!--    <button type="button" class="close" aria-label="Close" disabled="true"><span aria-hidden="true">Log in</span></button> -->
           </div>
           <div class="modal-body">
-            <!-- <h3 class="mb-4 title">New<br />Account</h3> -->
             <div class="form-group">
               <input type="text" id="name" v-model="name" class="form-control p-0" required style="box-shadow: none; border-radius: 0px" />
               <label class="form-control-placeholder p-0" for="name lbl">Full Name</label>
@@ -40,7 +39,6 @@
             <label class="tc">By signing up I accept the <strong>Terms & Conditions</strong> of Daily</label>
           </div>
           <div class="modal-footer border-0 mb-4"><button type="button" class="btn signup col-6 col-md-6" @click="registerUser">SIGNUP</button></div>
-          <!-- data-dismiss="modal" -->
         </div>
       </div>
     </div>

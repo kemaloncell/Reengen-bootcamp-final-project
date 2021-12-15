@@ -41,13 +41,6 @@ mongoose
 const users = require("./routes/api/users");
 app.use("/api/users", users);
 
-//Bring the factoryList route
-/* const factoryList = require("./routes/api/factories/factoryList");
-app.use("/api/factories/factoryList", factoryList); */
-
-/* const factoryList = require("./routes/api/factoryList");
-app.use("/api/factoryList", factoryList); */
-
 //the second of two different ways
 // FACTORY LIST
 const factoryList = require("./routes/api/factoryList");
