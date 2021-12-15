@@ -18,5 +18,22 @@ export default {
     Turkish: "Türkçe",
     Available: "Mevcut",
     Dashboard: "Gösterge Paneli",
+    // Dashboard
+    FactoryListTab: "Fabrika Listesi",
+    FactoryNameTab: "Fabrika Adı",
+    FactoryListTableName: "Fabrika Listesi",
+    FactoryNameTableName: "Fabrika Adı",
+    AddNewColumn: "Yeni Sütun Ekle",
+    // Add Modal
+    AddColumn: "Sütun Ekle",
+    ColumnName: "Sütun Adı",
+    ColumnType: "Sütun Tipi",
+    AddBtn: "Ekle",
+    CancelBtn: "İptal",
+    // Delete Modal
+    DeleteTitle: "Kaydı Sil",
+    DeleteDesc: "Bu Kaydı silmek istediğinizden emin misiniz?",
+    deleteAlert: "Bu işlem geri alınamaz.",
+    DeleteBtn: "Sil",
   },
 };

@@ -18,5 +18,22 @@ export default {
     Turkish: "Turkish",
     Available: "Available",
     Dashboard: "Dashboard",
+    // Dashboard
+    FactoryListTab: "Factory List",
+    FactoryNameTab: "Factory Name",
+    FactoryListTableName: "Factory List",
+    FactoryNameTableName: "Factory Name",
+    AddNewColumn: "Add New Column",
+    // Add Column Modal
+    AddColumn: "Add Column",
+    ColumnName: "Column Name",
+    ColumnType: "Column Type",
+    AddBtn: "Add",
+    CancelBtn: "Cancel",
+    // Delete Modal
+    DeleteTitle: "Delete Record",
+    DeleteDesc: "Are you sure you want to delete these Record?",
+    deleteAlert: "This action cannot be undone.",
+    DeleteBtn: "Delete",
   },
 };

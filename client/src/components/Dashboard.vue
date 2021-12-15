@@ -1,13 +1,13 @@
 <template>
   <div>
-    <section id="tabs" class="project-tab mt-5">
+    <section id="tabs" class="project-tab">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <nav>
               <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#factoryList" role="tab" aria-controls="nav-home" aria-selected="true">Factory List</a>
-                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#factoryName" role="tab" aria-controls="nav-contact" aria-selected="false">Factory Name</a>
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#factoryList" role="tab" aria-controls="nav-home" aria-selected="true">{{ $t("message.FactoryListTab") }}</a>
+                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#factoryName" role="tab" aria-controls="nav-contact" aria-selected="false">{{ $t("message.FactoryNameTab") }}</a>
               </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
@@ -180,5 +180,8 @@ table.table .avatar {
 }
 .modal form label {
   font-weight: normal;
+}
+#tabs {
+  margin-top: 100px !important;
 }
 </style>

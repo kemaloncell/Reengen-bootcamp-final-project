@@ -4,16 +4,18 @@
       <div class="modal-content">
         <form @submit.prevent="">
           <div class="modal-header">
-            <h4 class="modal-title">Delete Factroy Data</h4>
+            <h4 class="modal-title">{{ $t("message.DeleteTitle") }}</h4>
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           </div>
           <div class="modal-body">
-            <p>Are you sure you want to delete these Records?</p>
-            <p class="text-warning"><small>This action cannot be undone.</small></p>
+            <p>{{ $t("message.DeleteDesc") }}</p>
+            <p class="text-warning">
+              <small>{{ $t("message.deleteAlert") }}</small>
+            </p>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" />
-            <input type="submit" class="btn btn-danger" data-dismiss="modal" @click="deleteTableData" value="Delete" />
+            <input type="button" class="btn btn-default" data-dismiss="modal" :value="$t('message.CancelBtn')" />
+            <input type="submit" class="btn btn-danger" data-dismiss="modal" @click="deleteTableData" :value="$t('message.DeleteBtn')" />
           </div>
         </form>
       </div>

@@ -4,23 +4,23 @@
       <div class="modal-content">
         <form @submit.prevent="">
           <div class="modal-header">
-            <h4 class="modal-title">Add Employee</h4>
+            <h4 class="modal-title">{{ $t("message.AddColumn") }}</h4>
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           </div>
           <div class="modal-body">
             <div class="form-group">
-              <label>Column Name</label>
+              <label>{{ $t("message.ColumnName") }}</label>
               <input v-model="column_name" placeholder="e.g. column_name or column" type="text" class="form-control" required />
             </div>
 
-            <label>Column Type</label>
+            <label>{{ $t("message.ColumnType") }}</label>
             <select v-model="column_type" class="browser-default custom-select" required>
               <option v-for="(items, i) in columnTypes" :key="i">{{ items }}</option>
             </select>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" />
-            <input type="submit" class="btn btn-success" value="Add" @click="addFactoryColumn" />
+            <input type="button" class="btn btn-default" data-dismiss="modal" :value="$t('message.CancelBtn')" />
+            <input type="submit" class="btn btn-success" :value="$t('message.AddBtn')" @click="addFactoryColumn" />
           </div>
         </form>
       </div>
