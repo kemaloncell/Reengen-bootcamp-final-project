@@ -35,5 +35,19 @@ export default {
     DeleteDesc: "Bu Kaydı silmek istediğinizden emin misiniz?",
     deleteAlert: "Bu işlem geri alınamaz.",
     DeleteBtn: "Sil",
+    //Update Modal
+    UpdateTitle: "Tabloyu Güncelle",
+    UpdateName: "Şirket Adı",
+    UpdateStartDate: "Başlangıç Tarihi",
+    UpdateEndDate: "Bitiş Tarihi",
+    UpdateEmpNumber: "Çalışan Sayısı",
+    UpdateSpecialNumber: "Özel Üye",
+    SaveBtn: "Kaydet",
+    //Update Factory Name Modal
+    UpdateRowName: "Kullanan Birim",
+    UpdateDateRange: "Tarih Aralığı",
+    UpdateUsage: "Kullanım",
+    UpdateUsageFee: "Kullanım Ücreti",
+    UpdateDiscountedPrice: "İndirimli Fiyat",
   },
 };

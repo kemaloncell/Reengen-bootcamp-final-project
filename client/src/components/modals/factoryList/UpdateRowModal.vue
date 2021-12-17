@@ -4,34 +4,34 @@
       <div class="modal-content">
         <form @submit.prevent="">
           <div class="modal-header">
-            <h4 class="modal-title">Update Table</h4>
+            <h4 class="modal-title">{{ $t("message.UpdateTitle") }}</h4>
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           </div>
           <div class="modal-body">
             <div class="form-group">
-              <label>Company Name</label>
+              <label>{{ $t("message.UpdateName") }}</label>
               <input type="text" class="form-control" v-model="company_name" required />
             </div>
             <div class="form-group">
-              <label>Start Date</label>
+              <label>{{ $t("message.UpdateStartDate") }}</label>
               <input type="date" class="form-control" v-model="start_date" required />
             </div>
             <div class="form-group">
-              <label>End Date</label>
+              <label>{{ $t("message.UpdateEndDate") }}</label>
               <input type="date" class="form-control" v-model="end_date" required />
             </div>
             <div class="form-group">
-              <label>Employees Number</label>
+              <label>{{ $t("message.UpdateEmpNumber") }}</label>
               <input type="number" class="form-control" v-model="employees_number" required />
             </div>
             <div class="form-group checkDiv">
-              <label>Special Member</label>
+              <label>{{ $t("message.UpdateSpecialNumber") }}</label>
               <input type="checkbox" class="check" v-model="special_member" required />
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" />
-            <input type="submit" class="btn btn-info" data-dismiss="modal" value="Save" @click="updateTableData" />
+            <input type="button" class="btn btn-default" data-dismiss="modal" :value="$t('message.CancelBtn')" />
+            <input type="submit" class="btn btn-info" data-dismiss="modal" :value="$t('message.SaveBtn')" @click="updateTableData" />
           </div>
         </form>
       </div>

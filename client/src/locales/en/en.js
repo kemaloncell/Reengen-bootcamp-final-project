@@ -35,5 +35,20 @@ export default {
     DeleteDesc: "Are you sure you want to delete these Record?",
     deleteAlert: "This action cannot be undone.",
     DeleteBtn: "Delete",
+    //Update Factory List Modal
+    UpdateTitle: "Update Table",
+    UpdateName: "Company Name",
+    UpdateStartDate: "Start Date",
+    UpdateEndDate: "End Date",
+    UpdateEmpNumber: "Employees Number",
+    UpdateSpecialNumber: "Special Member",
+    SaveBtn: "Save",
+
+    //Update Factory Name Modal
+    UpdateRowName: "Unit Using",
+    UpdateDateRange: "Date Range",
+    UpdateUsage: "Usage",
+    UpdateUsageFee: "Usage Fee",
+    UpdateDiscountedPrice: "Discounted Price",
   },
 };
